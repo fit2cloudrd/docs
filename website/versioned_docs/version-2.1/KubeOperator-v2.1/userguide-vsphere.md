@@ -1,6 +1,6 @@
 ---
 id: version-2.1-userguide-vsphere
-title:  在 vSphere 平台上规划、部署及管理 k8s 集群
+title:  在 vSphere 平台上规划、部署及管理 K8s 集群
 original_id: userguide-vsphere
 ---
 
@@ -49,9 +49,9 @@ KubeOperator 控制台 URL：http://host-ip ，将 host-ip 改为安装 KubeOper
 
 ### 2.2 备份
 
-KubeOperator目前的备份功能支持三种不同种类的存储，即 AWS S3、aliyun oss 和 azure 存储。为集群备份和恢复提供存储支持，实现备份和恢复功能。
+KubeOperator 目前的备份功能支持三种不同种类的存储，即 AWS S3、aliyun oss 和 Azure 存储。为集群备份和恢复提供存储支持，实现备份和恢复功能。
 
-添加备份账号之前，请首先自行准备好 AWS S3 ，aliyun oss 或者 azure 存储账号信息，包括 AccessKey，SecretKey，endpoint 和桶/容器信息。下图即是添加备份账号详细信息。
+添加备份账号之前，请首先自行准备好 AWS S3 ，aliyun oss 或者 Azure 存储账号信息，包括 AccessKey，SecretKey，endpoint 和桶/容器信息。下图即是添加备份账号详细信息。
 
 以添加 S3 为例，输入名称和 AccessKey，SecretKey 和端点（对应 AWS S3 系统里的 endpoint），单击【获取桶/容器】获取桶名称，建议在 S3 新建一个桶单独使用，最后提交。
 
@@ -63,15 +63,14 @@ KubeOperator 支持自动创建 NFS 存储和添加自行准备的 NFS 存储，
 
 ### 3.1 新建 NFS
 
-首先要准备一个主机节点单独作为 NFS 存储资源，可以是虚拟机或物理机，操作系统要求：CentOS 7.6 Minimal，最低硬件配置为 2U/2G，磁盘大小建议 xxx G？，在kubeoperator控制台【主机】页面添加该主机。
+首先要准备一个主机节点单独作为 NFS 存储资源，可以是虚拟机或物理机，操作系统要求：CentOS 7.6 Minimal，最低硬件配置为 2核2G，磁盘大小建议 500 G，在 KubeOperator 控制台【主机】页面添加该主机。
 
 详细步骤：
   
 - 1 KubeOperator 控制台【主机】页面，添加主机，注意这个主机不可以作为 K8s 集群的节点；
-- 2 ssh登录该主机节点，为 NFS 新建一个挂载路径，添加存储使用(例如：#mkdir nfs，挂载路径为：/nfs)；
-- 3 KubeOpeartor 控制台【存储】，单击【添加】，选中新建 NFS ，在主机下拉列表，选择上述第一步添加的 NFS 主机，如果外部所有网络可访问，白名单选项需要填 ” * “，挂载路径：/nfs，提交。
+- 2 KubeOpeartor 控制台【存储】，单击【添加】，选中新建 NFS ，在主机下拉列表，选择上述第一步添加的 NFS 主机，如果该 NFS 可以被所有网络访问，白名单选项需要填 ” * “，挂载路径可自定义，如 /nfs，点击【提交】。
 
-添加成功后，创建集群时如果选择 NFS 存储，可以看到该 NFS 存储。
+添加成功后，创建集群时如果选择 NFS 存储，可以看到该 NFS 存储，且状态为“运行中”。
 
 ![storage-1](https://github.com/KubeOperator/docs/blob/master/website/static/img/nfs-auto.png?raw=true)
 
